@@ -766,7 +766,7 @@ copyTo - Copia o conteudo da primeira imagem par a segunda(Imagem1.copyTo(Imagem
 <div class="sect3">
 <h4 id="_código_3">2.3.2. Código</h4>
 <div class="listingblock">
-<div class="title">regions.cpp</div>
+<div class="title">labeling.cpp</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="cpp"><span class="tok-cp">#include</span> <span class="tok-cpf">&lt;iostream&gt;</span><span class="tok-cp"></span>
 <span class="tok-cp">#include</span> <span class="tok-cpf">&lt;cv.h&gt;</span><span class="tok-cp"></span>
@@ -822,63 +822,7 @@ copyTo - Copia o conteudo da primeira imagem par a segunda(Imagem1.copyTo(Imagem
 </div>
 <div class="sect3">
 <h4 id="_análise_3">2.3.3. Análise</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>O programa inicia lendo a imagem:</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="biel.png" alt="biel">
-</div>
-<div class="title">Figure 5. biel.png</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Em seguida, recebe os pontos do usuário, e verifica se eles estão dentro dos limites da imagem:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-o">&lt;</span><span class="tok-mi">0</span> <span class="tok-o">||</span> <span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-o">&lt;</span><span class="tok-mi">0</span> <span class="tok-o">||</span> <span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-o">&lt;</span><span class="tok-mi">0</span> <span class="tok-o">||</span> <span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-o">&lt;</span><span class="tok-mi">0</span> <span class="tok-o">||</span> <span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-o">&gt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">height</span> <span class="tok-o">||</span> <span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-o">&gt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">width</span> <span class="tok-o">||</span> <span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-o">&gt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">height</span> <span class="tok-o">||</span> <span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-o">&gt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">width</span><span class="tok-p">){</span>
-      <span class="tok-n">flag</span> <span class="tok-o">=</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
-      <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;Coodenadas invalidas. Digite novamente:&quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
-    <span class="tok-p">}</span></code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Então, um loop(for) percorre a região limitada pelos pontos invertendo o valor dos pixels a partir da operação "Cor negativa = 255 - Cor original":</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span> <span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">];</span><span class="tok-n">i</span><span class="tok-o">&lt;=</span><span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">];</span><span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
-    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">];</span><span class="tok-n">j</span><span class="tok-o">&lt;=</span><span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">];</span><span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
-      <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">=</span> <span class="tok-mi">255</span> <span class="tok-o">-</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">);</span>
-    <span class="tok-p">}</span>
-  <span class="tok-p">}</span></code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Por fim, exibe a imagem com o efeito aplicado:</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="invertida.png" alt="invertida">
-</div>
-<div class="title">Figure 6. invertida.png</div>
-</div>
+
 </div>
 </div>
 </div>
@@ -886,7 +830,7 @@ copyTo - Copia o conteudo da primeira imagem par a segunda(Imagem1.copyTo(Imagem
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-18 23:47:51 BRT
+Last updated 2016-09-18 23:59:00 BRT
 </div>
 </div>
 </body>
