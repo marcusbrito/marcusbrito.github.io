@@ -7,77 +7,47 @@ using namespace std;
 
 
 void seedfill(Mat image, CvPoint p, unsigned char cor){
+  stack<CvPoint> pilha;
   unsigned char cor_atual;
-  CvPoint aux1,aux2,aux3,aux4,aux5,aux6,aux7,aux8;
+  CvPoint aux1,aux2,aux3,aux4,atual;
 
-  cor_atual= image.at<uchar>(p.y,p.x) ;
-  
-  if(image.at<uchar>(p.y + 1,p.x) == cor_atual){
-    image.at<uchar>(p.y,p.x) = cor;
-
-    aux1.x = p.x;
-    aux1.y = p.y + 1;
+  pilha.push(p);
+  cor_atual = image.at<uchar>(p.y,p.x);
+  while(!pilha.empty()){
+    atual = pilha.top();
+    pilha.pop();
     
-    seedfill(image,aux1,cor);
-  }
-  if(image.at<uchar>(p.y - 1,p.x) == cor_atual){
-    image.at<uchar>(p.y,p.x) = cor;
+    if(image.at<uchar>(atual.y + 1,atual.x) == cor_atual && atual.y < image.cols - 1 ){
 
-    aux2.x = p.x;
-    aux2.y = p.y - 1;
+    aux1.x = atual.x;
+    aux1.y = atual.y + 1;
+    pilha.push(aux1);
     
-    seedfill(image,aux2,cor);
-  }
-  if(image.at<uchar>(p.y,p.x + 1) == cor_atual){
-    image.at<uchar>(p.y,p.x) = cor;
+    }
+    if(image.at<uchar>(atual.y - 1,atual.x) == cor_atual && atual.y > 0){
 
-    aux3.x = p.x + 1;
-    aux3.y = p.y;
-    
-    seedfill(image,aux3,cor);
-  }
-  if(image.at<uchar>(p.y,p.x - 1) == cor_atual){
-    image.at<uchar>(p.y,p.x) = cor;
+    aux2.x = atual.x;
+    aux2.y = atual.y - 1;
+    pilha.push(aux2);
 
-    aux4.x = p.x - 1;
-    aux4.y = p.y;
     
-    seedfill(image,aux4,cor);
-  }
-  if(image.at<uchar>(p.y + 1,p.x + 1) == cor_atual){
-    image.at<uchar>(p.y,p.x) = cor;
+    }
+    if(image.at<uchar>(atual.y,atual.x + 1) == cor_atual && atual.x < image.rows - 1 ){
 
-    aux5.x = p.x + 1;
-    aux5.y = p.y + 1;
-    
-    seedfill(image,aux5,cor);
-  }
-  if(image.at<uchar>(p.y + 1,p.x - 1) == cor_atual){
-    image.at<uchar>(p.y,p.x) = cor;
+    aux3.x = atual.x + 1;
+    aux3.y = atual.y;
+    pilha.push(aux3);
 
-    aux6.x = p.x - 1;
-    aux6.y = p.y + 1;
     
-    seedfill(image,aux6,cor);
-  }
-  if(image.at<uchar>(p.y - 1,p.x + 1) == cor_atual){
-    image.at<uchar>(p.y,p.x) = cor;
+    }
+    if(image.at<uchar>(atual.y,atual.x - 1) == cor_atual && atual.x > 0){
 
-    aux7.x = p.x + 1;
-    aux7.y = p.y - 1;
-    
-    seedfill(image,aux7,cor);
+    aux4.x = atual.x - 1;
+    aux4.y = atual.y;
+    pilha.push(aux4);
+    }
+  image.at<uchar>(atual.y,atual.x) = cor;  
   }
-  if(image.at<uchar>(p.y - 1,p.x - 1) == cor_atual){
-    image.at<uchar>(p.y,p.x) = cor;
-
-    aux8.x = p.x - 1;
-    aux8.y = p.y - 1;
-    
-    seedfill(image,aux8,cor);
-  }
-  
-  
 }
 
 int main(int argc, char** argv){
@@ -105,13 +75,13 @@ int main(int argc, char** argv){
     {
       p.x=0;
       p.y=i;
-      floodFill(image,p,0);
+      seedfill(image,p,0);
     }
     if(image.at<uchar>(i,width-1) == 255)
     {
       p.x=width-1;
       p.y=i;
-      floodFill(image,p,0);
+      seedfill(image,p,0);
     }
   }
   for(int j=0; j<width; j++) 
@@ -120,19 +90,19 @@ int main(int argc, char** argv){
     {
       p.x=j;
       p.y=0;
-      floodFill(image,p,0);
+      seedfill(image,p,0);
     }
     if(image.at<uchar>(height -1,j) == 255)
     {
       p.x=j;
       p.y=height-1;
-      floodFill(image,p,0);
+      seedfill(image,p,0);
     }
   }
 
   p.x=0;
   p.y=0;
-  floodFill(image,p,0);
+  seedfill(image,p,0);
 
   for(int i=0; i<height; i++)
   {
@@ -144,7 +114,7 @@ int main(int argc, char** argv){
         comf++;
         p.x=j;
         p.y=i;
-       floodFill(image,p,comf);
+       seedfill(image,p,comf);
 
         p1.x=j-1;
         p1.y=i;
