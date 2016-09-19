@@ -607,10 +607,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>if(p1[0]&lt;0 || p1[1]&lt;0 || p2[0]&lt;0 || p2[1]&lt;0 || p1[0]&gt; image.size().height || p1[1]&gt; image.size().width || p2[0]&gt; image.size().height || p2[1]&gt; image.size().width){
-      flag = 1;
-      cout &lt;&lt; "Coodenadas invalidas. Digite novamente:" &lt;&lt; endl;
-    }</pre>
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-o">&lt;</span><span class="tok-mi">0</span> <span class="tok-o">||</span> <span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-o">&lt;</span><span class="tok-mi">0</span> <span class="tok-o">||</span> <span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-o">&lt;</span><span class="tok-mi">0</span> <span class="tok-o">||</span> <span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-o">&lt;</span><span class="tok-mi">0</span> <span class="tok-o">||</span> <span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-o">&gt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">height</span> <span class="tok-o">||</span> <span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-o">&gt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">width</span> <span class="tok-o">||</span> <span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-o">&gt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">height</span> <span class="tok-o">||</span> <span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-o">&gt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">width</span><span class="tok-p">){</span>
+      <span class="tok-n">flag</span> <span class="tok-o">=</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
+      <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;Coodenadas invalidas. Digite novamente:&quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -622,11 +622,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>for(int i= p1[0];i&lt;=p2[0];i++){
-    for(int j=p1[1];j&lt;=p2[1];j++){
-      image.at&lt;uchar&gt;(i,j) = 255 - image.at&lt;uchar&gt;(i,j);
-    }
-  }</pre>
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span> <span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">];</span><span class="tok-n">i</span><span class="tok-o">&lt;=</span><span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">];</span><span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
+    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-n">p1</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">];</span><span class="tok-n">j</span><span class="tok-o">&lt;=</span><span class="tok-n">p2</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">];</span><span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
+      <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">=</span> <span class="tok-mi">255</span> <span class="tok-o">-</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">);</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -888,7 +888,7 @@ copyTo - Copia o conteudo da primeira imagem par a segunda(Imagem1.copyTo(Imagem
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-18 23:28:34 BRT
+Last updated 2016-09-18 23:31:01 BRT
 </div>
 </div>
 </body>
