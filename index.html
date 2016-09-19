@@ -428,8 +428,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_objetivo">1. Objetivo</a></li>
-<li><a href="#_1ª_unidade">2. 1ª Unidade</a>
+<li><a href="#_sobre">1. Sobre</a></li>
+<li><a href="#_primeira_unidade">2. Primeira Unidade</a>
 <ul class="sectlevel2">
 <li><a href="#_negativo">2.1. Negativo</a></li>
 </ul>
@@ -439,7 +439,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_objetivo">1. Objetivo</h2>
+<h2 id="_sobre">1. Sobre</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Esse espaço tem como objetivo expor os projetos e exercícios da matéria de Processamento Digital de Imagem</p>
@@ -447,12 +447,75 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1ª_unidade">2. 1ª Unidade</h2>
+<h2 id="_primeira_unidade">2. Primeira Unidade</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_negativo">2.1. Negativo</h3>
+<div class="sect3">
+<h4 id="_objetivo">2.1.1. Objetivo</h4>
 <div class="paragraph">
 <p>A ideia do programa é receber do usuário as coordenadas de dois pontos e, em seguida, exibir a imagem(que foi inicializada junto com o programa), invertendo a cor dos pixels limitados pelos pontos.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_código">2.1.2. Código</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cpp" data-lang="cpp">#include &lt;iostream&gt;
+#include &lt;cv.h&gt;
+#include &lt;highgui.h&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int, char**){
+  Mat image;
+  Vec3b val;
+  int p1[2], p2[2],flag;
+
+  image= imread("biel.png",CV_LOAD_IMAGE_GRAYSCALE);
+  if(!image.data)
+    cout &lt;&lt; "Deu ruim" &lt;&lt; endl;
+
+
+  namedWindow("janela",WINDOW_AUTOSIZE);
+
+    cout &lt;&lt; "O tamanho da imagem eh:" &lt;&lt; image.size().height &lt;&lt; "/"&lt;&lt; image.size().width&lt;&lt; endl;
+  do{
+    cout &lt;&lt; "Digite a coordenada X do ponto inicial:" &lt;&lt; endl;
+    cin&gt;&gt; p1[0];
+    cout &lt;&lt; "Digite a coordenada Y do ponto inicial:" &lt;&lt; endl;
+    cin&gt;&gt; p1[1];
+    cout &lt;&lt; "Digite a coordenada X do ponto final:" &lt;&lt; endl;
+    cin&gt;&gt; p2[0];
+    cout &lt;&lt; "Digite a coordenada Y do ponto final:" &lt;&lt; endl;
+    cin&gt;&gt; p2[1];
+    flag = 0;
+    if(p1[0]&lt;0 || p1[1]&lt;0 || p2[0]&lt;0 || p2[1]&lt;0 || p1[0]&gt; image.size().height || p1[1]&gt; image.size().width || p2[0]&gt; image.size().height || p2[1]&gt; image.size().width){
+      flag = 1;
+      cout &lt;&lt; "Coodenadas invalidas. Digite novamente:" &lt;&lt; endl;
+    }
+
+  }while(flag==1);
+
+  for(int i= p1[0];i&lt;=p2[0];i++){
+    for(int j=p1[1];j&lt;=p2[1];j++){
+      image.at&lt;uchar&gt;(i,j) = 255 - image.at&lt;uchar&gt;(i,j);
+    }
+  }
+
+  imshow("janela", image);
+  waitKey();
+
+
+  return 0;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análise">2.1.3. Análise</h4>
+
 </div>
 </div>
 </div>
@@ -460,7 +523,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-18 22:10:10 BRT
+Last updated 2016-09-18 22:19:13 BRT
 </div>
 </div>
 </body>
