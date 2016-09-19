@@ -880,7 +880,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
   <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
   <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
-  <span class="tok-n">seedfill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">);</span>
+  <span class="tok-n">seedfill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-mi">254</span><span class="tok-p">);</span>
 
   <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">height</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">)</span>
   <span class="tok-p">{</span>
@@ -892,24 +892,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         <span class="tok-n">comf</span><span class="tok-o">++</span><span class="tok-p">;</span>
         <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span>
         <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
-       <span class="tok-n">seedfill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">comf</span><span class="tok-p">);</span>
 
         <span class="tok-n">p1</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">;</span>
         <span class="tok-n">p1</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
-        <span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">);</span>
+        <span class="tok-n">seedfill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">);</span>
       <span class="tok-p">}</span>
     <span class="tok-p">}</span>
   <span class="tok-p">}</span>
   <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">height</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
     <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">width</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
       <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-mi">255</span><span class="tok-p">){</span>
-    <span class="tok-c1">// achou um objeto</span>
-    <span class="tok-n">semf</span><span class="tok-o">++</span><span class="tok-p">;</span>
-    <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span>
-    <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
-    <span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">semf</span><span class="tok-p">);</span>
+        <span class="tok-c1">// achou um objeto</span>
+        <span class="tok-n">semf</span><span class="tok-o">++</span><span class="tok-p">;</span>
+        <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span>
+        <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
+        <span class="tok-n">seedfill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">semf</span><span class="tok-p">);</span>
+      <span class="tok-p">}</span>
     <span class="tok-p">}</span>
-  <span class="tok-p">}</span>
   <span class="tok-p">}</span>
   <span class="tok-n">printf</span><span class="tok-p">(</span><span class="tok-s">&quot;Bolhas com furos: %i</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">,</span><span class="tok-n">comf</span><span class="tok-p">);</span>
   <span class="tok-n">printf</span><span class="tok-p">(</span><span class="tok-s">&quot;Bolhas sem furos: %i</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">,</span><span class="tok-n">semf</span><span class="tok-p">);</span>
@@ -1049,7 +1048,86 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 </li>
+<li>
+<p>Inicia-se então, a busca pelas bolhas. Primeiramente, executa-se um seedfill no ponto(0,0), com o objetivo de preecher o plano de fundo com a a "cor" 254, de forma que é possível diferenciar a cor do plano de fundo da cor dos buracos:</p>
+</li>
 </ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
+  <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
+  <span class="tok-n">seedfill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-mi">254</span><span class="tok-p">);</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Em seguida, a imagem é varrida a procura de um píxel com valor 0, cujo o ponto anterior possui valor 255, ou seja, um buraco. O contador comf(número de bolhas com furos) é incrementado e, em seguida, executa-se o seedfill no ponto anterior, de forma que a bolha é preenchida com o valor 1(para que essa mesma bolha não seja levada em conta novamente). Ao final desse processo, as bolhas com furos já foram contabilizadas.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">height</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">width</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">)</span>
+    <span class="tok-p">{</span>
+      <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-mi">0</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-mi">255</span> <span class="tok-p">)</span>
+      <span class="tok-p">{</span>
+        <span class="tok-c1">// achou um objeto</span>
+        <span class="tok-n">comf</span><span class="tok-o">++</span><span class="tok-p">;</span>
+        <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span>
+        <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
+
+        <span class="tok-n">p1</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">;</span>
+        <span class="tok-n">p1</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
+        <span class="tok-n">seedfill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">);</span>
+      <span class="tok-p">}</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Então, percorre-se novamente a imagem, procurando agora pontos com valor 255, ou seja, as bolhas(sem furos) restantes. Ao encontrá-las, execulta-se o seedfill e incrementa-se o contador semf(número de bolhas sem furos). Ao final desse processo, todas as bolhas já foram contadas.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">height</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
+    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">width</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
+      <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-mi">255</span><span class="tok-p">){</span>
+        <span class="tok-c1">// achou um objeto</span>
+        <span class="tok-n">semf</span><span class="tok-o">++</span><span class="tok-p">;</span>
+        <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span>
+        <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
+        <span class="tok-n">seedfill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">semf</span><span class="tok-p">);</span>
+      <span class="tok-p">}</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Por fim, é exibida a imagem após as alterações feitas pelo seedfill, assim como o número de bolhas com e sem furos:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="labeling.png" alt="labeling">
+</div>
+<div class="title">Figure 6. labeling.png</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Bolhas com furos: 7
+Bolhas sem furos: 14</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1058,7 +1136,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-19 17:11:21 BRT
+Last updated 2016-09-19 17:38:04 BRT
 </div>
 </div>
 </body>

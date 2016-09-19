@@ -102,7 +102,7 @@ int main(int argc, char** argv){
 
   p.x=0;
   p.y=0;
-  seedfill(image,p,0);
+  seedfill(image,p,254);
 
   for(int i=0; i<height; i++)
   {
@@ -114,24 +114,23 @@ int main(int argc, char** argv){
         comf++;
         p.x=j;
         p.y=i;
-       seedfill(image,p,comf);
 
         p1.x=j-1;
         p1.y=i;
-        floodFill(image,p1,1);
+        seedfill(image,p1,1);
       }
     }
   }
   for(int i=0; i<height; i++){
     for(int j=0; j<width; j++){
       if(image.at<uchar>(i,j) == 255){
-    // achou um objeto
-    semf++;
-    p.x=j;
-    p.y=i;
-    floodFill(image,p,semf);
+        // achou um objeto
+        semf++;
+        p.x=j;
+        p.y=i;
+        seedfill(image,p,semf);
+      }
     }
-  }
   }
   printf("Bolhas com furos: %i\n",comf);
   printf("Bolhas sem furos: %i\n",semf);
