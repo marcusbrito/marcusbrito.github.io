@@ -7,7 +7,7 @@ int main(int argc, char** argv){
   Mat image;
   int width, height;
   
-  image = imread(argv[1],CV_LOAD_IMAGE_GRAYSCALE);
+  image = imread(argv[1],CV_LOAD_IMAGE_COLOR);
   
   if(!image.data){
     std::cout << "imagem nao carregou corretamente\n";
@@ -20,7 +20,6 @@ int main(int argc, char** argv){
 
   image(Rect(0, 0, width/2, height/2)).copyTo(trocada(Rect(width/2, height/2, width/2, height/2)));
   
-
   image(Rect(0, height/2, width/2, height/2)).copyTo(trocada(Rect(width/2,0, width/2, height/2)));
 
   image(Rect(width/2,0,width/2,height/2)).copyTo(trocada(Rect(0,height/2, width/2, height/2)));
@@ -28,7 +27,6 @@ int main(int argc, char** argv){
   image(Rect(width/2,height/2,width/2,height/2)).copyTo(trocada(Rect(0,0, width/2, height/2)));
 
   
-
   imshow("image", trocada);
   waitKey();
   return 0;

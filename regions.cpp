@@ -10,7 +10,7 @@ int main(int, char**){
   Vec3b val;
   int p1[2], p2[2],flag;
 
-  image= imread("biel.png",CV_LOAD_IMAGE_GRAYSCALE);
+  image= imread("dead.png",CV_LOAD_IMAGE_COLOR);
   if(!image.data)
     cout << "Deu ruim" << endl;
 
