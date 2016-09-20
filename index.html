@@ -1824,15 +1824,28 @@ Bolhas sem furos: 14</pre>
           <span class="tok-o">&amp;</span><span class="tok-n">inf_slider</span><span class="tok-p">,</span>
           <span class="tok-n">inf_max</span><span class="tok-p">,</span>
           <span class="tok-n">blend</span> <span class="tok-p">);</span>
-  <span class="tok-n">blend</span><span class="tok-p">(</span><span class="tok-n">inf_slider</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
-  <span class="tok-o">----</span>
-
-  <span class="tok-o">*</span> <span class="tok-n">Sempre</span> <span class="tok-n">que</span> <span class="tok-n">o</span> <span class="tok-n">usu</span><span class="tok-err">á</span><span class="tok-n">rio</span> <span class="tok-n">altera</span> <span class="tok-n">algum</span> <span class="tok-n">valor</span><span class="tok-p">,</span> <span class="tok-n">a</span> <span class="tok-n">fun</span><span class="tok-err">çã</span><span class="tok-n">o</span> <span class="tok-n">_blend_</span> <span class="tok-err">é</span> <span class="tok-n">novamente</span> <span class="tok-n">chamada</span><span class="tok-p">,</span> <span class="tok-n">os</span> <span class="tok-n">c</span><span class="tok-err">á</span><span class="tok-n">lculos</span> <span class="tok-n">s</span><span class="tok-err">ã</span><span class="tok-n">o</span> <span class="tok-n">feitos</span> <span class="tok-n">novamentes</span><span class="tok-p">,</span> <span class="tok-n">e</span> <span class="tok-n">a</span> <span class="tok-n">nova</span> <span class="tok-n">imagem</span> <span class="tok-err">é</span> <span class="tok-n">exibida</span><span class="tok-p">.</span>
-
-  <span class="tok-o">*</span> <span class="tok-n">Esse</span> <span class="tok-n">m</span><span class="tok-err">é</span><span class="tok-n">todo</span> <span class="tok-n">provou</span><span class="tok-o">-</span><span class="tok-n">se</span> <span class="tok-n">bastante</span> <span class="tok-n">efetivo</span><span class="tok-p">,</span> <span class="tok-n">permitindo</span> <span class="tok-n">produzir</span> <span class="tok-n">imagens</span> <span class="tok-n">com</span> <span class="tok-n">um</span> <span class="tok-n">efeito</span> <span class="tok-n">muito</span> <span class="tok-n">similar</span> <span class="tok-n">ao</span> <span class="tok-n">da</span> <span class="tok-n">lente</span> <span class="tok-nl">especial</span><span class="tok-p">:</span>
-
-<span class="tok-n">image</span><span class="tok-o">::</span><span class="tok-n">tiltshift</span><span class="tok-p">.</span><span class="tok-n">png</span><span class="tok-p">[]</span>
-<span class="tok-n">image</span><span class="tok-o">::</span><span class="tok-n">vaticano</span><span class="tok-p">.</span><span class="tok-n">jpg</span><span class="tok-p">[]</span></code></pre>
+  <span class="tok-n">blend</span><span class="tok-p">(</span><span class="tok-n">inf_slider</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sempre que o usuário altera algum valor, a função <em>blend</em> é novamente chamada, os cálculos são feitos novamentes, e a nova imagem é exibida.</p>
+</li>
+<li>
+<p>Esse método provou-se bastante efetivo, permitindo produzir imagens com um efeito muito similar ao da lente especial:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="tiltshift.png" alt="tiltshift">
+</div>
+<div class="title">Figure 13. Função</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="vaticano.png" alt="vaticano">
 </div>
 </div>
 </div>
@@ -1842,7 +1855,7 @@ Bolhas sem furos: 14</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-20 16:39:52 BRT
+Last updated 2016-09-20 16:43:51 BRT
 </div>
 </div>
 </body>
