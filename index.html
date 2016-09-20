@@ -1286,9 +1286,11 @@ Bolhas sem furos: 14</pre>
 <span class="tok-k">using</span> <span class="tok-k">namespace</span> <span class="tok-n">std</span><span class="tok-p">;</span>
 
 <span class="tok-kt">int</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">argc</span><span class="tok-p">,</span> <span class="tok-kt">char</span><span class="tok-o">**</span> <span class="tok-n">argv</span><span class="tok-p">){</span>
+
   <span class="tok-n">Mat</span> <span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">image1</span><span class="tok-p">,</span><span class="tok-n">hist</span><span class="tok-p">,</span><span class="tok-n">hist1</span><span class="tok-p">,</span> <span class="tok-n">dif</span><span class="tok-p">;</span>
   <span class="tok-n">VideoCapture</span> <span class="tok-n">cap</span><span class="tok-p">;</span>
   <span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-n">Mat</span><span class="tok-o">&gt;</span> <span class="tok-n">planes</span><span class="tok-p">,</span><span class="tok-n">planes1</span><span class="tok-p">;</span>
+
   <span class="tok-kt">int</span> <span class="tok-n">nbins</span> <span class="tok-o">=</span> <span class="tok-mi">64</span><span class="tok-p">;</span>
   <span class="tok-kt">float</span> <span class="tok-n">range</span><span class="tok-p">[]</span> <span class="tok-o">=</span> <span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">256</span><span class="tok-p">};</span>
   <span class="tok-k">const</span> <span class="tok-kt">float</span> <span class="tok-o">*</span><span class="tok-n">histrange</span> <span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">range</span> <span class="tok-p">};</span>
@@ -1307,12 +1309,8 @@ Bolhas sem furos: 14</pre>
     <span class="tok-n">cap</span> <span class="tok-o">&gt;&gt;</span> <span class="tok-n">image1</span><span class="tok-p">;</span>
     <span class="tok-n">split</span> <span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span> <span class="tok-n">planes</span><span class="tok-p">);</span>
     <span class="tok-n">split</span> <span class="tok-p">(</span><span class="tok-n">image1</span><span class="tok-p">,</span> <span class="tok-n">planes1</span><span class="tok-p">);</span>
-    <span class="tok-n">calcHist</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">planes</span><span class="tok-p">[</span><span class="tok-mi">2</span><span class="tok-p">],</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-p">(),</span> <span class="tok-n">hist</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span>
-             <span class="tok-o">&amp;</span><span class="tok-n">nbins</span><span class="tok-p">,</span> <span class="tok-o">&amp;</span><span class="tok-n">histrange</span><span class="tok-p">,</span>
-             <span class="tok-n">uniform</span><span class="tok-p">,</span> <span class="tok-n">acummulate</span><span class="tok-p">);</span>
-    <span class="tok-n">calcHist</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">planes1</span><span class="tok-p">[</span><span class="tok-mi">2</span><span class="tok-p">],</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-p">(),</span> <span class="tok-n">hist1</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span>
-             <span class="tok-o">&amp;</span><span class="tok-n">nbins</span><span class="tok-p">,</span> <span class="tok-o">&amp;</span><span class="tok-n">histrange</span><span class="tok-p">,</span>
-             <span class="tok-n">uniform</span><span class="tok-p">,</span> <span class="tok-n">acummulate</span><span class="tok-p">);</span>
+    <span class="tok-n">calcHist</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">planes</span><span class="tok-p">[</span><span class="tok-mi">2</span><span class="tok-p">],</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-p">(),</span> <span class="tok-n">hist</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-o">&amp;</span><span class="tok-n">nbins</span><span class="tok-p">,</span> <span class="tok-o">&amp;</span><span class="tok-n">histrange</span><span class="tok-p">,</span><span class="tok-n">uniform</span><span class="tok-p">,</span> <span class="tok-n">acummulate</span><span class="tok-p">);</span>
+    <span class="tok-n">calcHist</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">planes1</span><span class="tok-p">[</span><span class="tok-mi">2</span><span class="tok-p">],</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-p">(),</span> <span class="tok-n">hist1</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-o">&amp;</span><span class="tok-n">nbins</span><span class="tok-p">,</span> <span class="tok-o">&amp;</span><span class="tok-n">histrange</span><span class="tok-p">,</span><span class="tok-n">uniform</span><span class="tok-p">,</span> <span class="tok-n">acummulate</span><span class="tok-p">);</span>
 
     <span class="tok-n">valor</span> <span class="tok-o">=</span> <span class="tok-n">norm</span><span class="tok-p">(</span><span class="tok-n">hist</span><span class="tok-p">,</span> <span class="tok-n">hist1</span><span class="tok-p">,</span> <span class="tok-n">NORM_L2</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-p">()</span> <span class="tok-p">);</span>
 
@@ -1414,13 +1412,14 @@ Bolhas sem furos: 14</pre>
 
 <span class="tok-kt">void</span> <span class="tok-nf">menu</span><span class="tok-p">(){</span>
   <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;</span><span class="tok-se">\n</span><span class="tok-s">pressione a tecla para ativar o filtro: </span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
-  <span class="tok-s">&quot;a - calcular modulo</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
+    <span class="tok-s">&quot;a - calcular modulo</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
     <span class="tok-s">&quot;m - media</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
     <span class="tok-s">&quot;g - gauss</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
     <span class="tok-s">&quot;v - vertical</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
-  <span class="tok-s">&quot;h - horizontal</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
+    <span class="tok-s">&quot;h - horizontal</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
     <span class="tok-s">&quot;l - laplaciano</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
-  <span class="tok-s">&quot;esc - sair</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">;</span>
+    <span class="tok-s">&quot;x - laplgauss</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span>
+    <span class="tok-s">&quot;esc - sair</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">;</span>
 <span class="tok-p">}</span>
 
 <span class="tok-kt">int</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">argvc</span><span class="tok-p">,</span> <span class="tok-kt">char</span><span class="tok-o">**</span> <span class="tok-n">argv</span><span class="tok-p">){</span>
@@ -1467,7 +1466,7 @@ Bolhas sem furos: 14</pre>
   <span class="tok-k">for</span><span class="tok-p">(;;){</span>
     <span class="tok-n">video</span> <span class="tok-o">&gt;&gt;</span> <span class="tok-n">cap</span><span class="tok-p">;</span>
     <span class="tok-n">cvtColor</span><span class="tok-p">(</span><span class="tok-n">cap</span><span class="tok-p">,</span> <span class="tok-n">frame</span><span class="tok-p">,</span> <span class="tok-n">CV_BGR2GRAY</span><span class="tok-p">);</span>
-    <span class="tok-n">flip</span><span class="tok-p">(</span><span class="tok-n">frame</span><span class="tok-p">,</span> <span class="tok-n">frame</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">);</span>
+    <span class="tok-c1">//flip(frame, frame, 1);</span>
     <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;original&quot;</span><span class="tok-p">,</span> <span class="tok-n">frame</span><span class="tok-p">);</span>
     <span class="tok-n">frame</span><span class="tok-p">.</span><span class="tok-n">convertTo</span><span class="tok-p">(</span><span class="tok-n">frame32f</span><span class="tok-p">,</span> <span class="tok-n">CV_32F</span><span class="tok-p">);</span>
     <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">aux</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span>
@@ -1476,7 +1475,8 @@ Bolhas sem furos: 14</pre>
     <span class="tok-p">}</span>
      <span class="tok-k">else</span><span class="tok-p">{</span>
       <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">Mat</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-n">CV_32F</span><span class="tok-p">,</span> <span class="tok-n">gauss</span><span class="tok-p">);</span>
-      <span class="tok-c1">//scaleAdd(mask, 1/16.0, Mat::zeros(3,3,CV_32F), mask1);</span>
+      <span class="tok-n">scaleAdd</span><span class="tok-p">(</span><span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-o">/</span><span class="tok-mf">16.0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-o">::</span><span class="tok-n">zeros</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-n">CV_32F</span><span class="tok-p">),</span> <span class="tok-n">mask1</span><span class="tok-p">);</span>
+      <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">mask1</span><span class="tok-p">;</span>
       <span class="tok-n">filter2D</span><span class="tok-p">(</span><span class="tok-n">frame32f</span><span class="tok-p">,</span> <span class="tok-n">frameAux</span><span class="tok-p">,</span> <span class="tok-n">frame32f</span><span class="tok-p">.</span><span class="tok-n">depth</span><span class="tok-p">(),</span> <span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">),</span> <span class="tok-mi">0</span><span class="tok-p">);</span>
       <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">Mat</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-n">CV_32F</span><span class="tok-p">,</span> <span class="tok-n">laplacian</span><span class="tok-p">);</span>
       <span class="tok-n">filter2D</span><span class="tok-p">(</span><span class="tok-n">frameAux</span><span class="tok-p">,</span> <span class="tok-n">frameFiltered</span><span class="tok-p">,</span> <span class="tok-n">frameAux</span><span class="tok-p">.</span><span class="tok-n">depth</span><span class="tok-p">(),</span> <span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">),</span> <span class="tok-mi">0</span><span class="tok-p">);</span>
@@ -1546,7 +1546,60 @@ Bolhas sem furos: 14</pre>
 </div>
 <div class="sect3">
 <h4 id="_análise_6">2.6.3. Análise</h4>
-
+<div class="ulist">
+<ul>
+<li>
+<p>O filtro laplaciano simula o operador matemático laplaciano, e, no caso da imagem, acaba medindo o quanto um ponto se destaca dos outros ao seu redor. Numa imagem com ruído, aparecem pontos claros em regiões escuras, assim como pontos escuros em regiões claras. Nessa situação, a aplicação puramente do filtro laplaciano não seria muito satisfatória, pois todos esses pontos de ruídos seriam extremamente evidenciados no resultado final, produzindo uma imagem de baixa qualidade.</p>
+</li>
+<li>
+<p>Uma das soluções para isso é tentar diminuir a intensidade desse pontos isolados de ruído. Uma forma de fazer isso é aplicando o filtro gaussinao. Seu efeito de difusão/borramento, que em outras situações pode paracer indesejado, resolve o porblema dos pontos isolados, pois "mistura" um pouco o ponto com os outros ao seu redor(é como se o ponto isolado fosse distribuido).</p>
+</li>
+<li>
+<p>A única diferença no código em si é que foi adicionada uma nova opção: "laplgauss". Ao ser verificado que o usuário escolheu a mesma, o progama aplica o filtro gaussiano e armazena a imagem em uma Matriz auxiliar. Em seguida, sobre essa matriz auxiliar é aplicado o filtro laplaciano, resultando na imagem final:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">aux</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span>
+<span class="tok-p">{</span>
+	<span class="tok-n">filter2D</span><span class="tok-p">(</span><span class="tok-n">frame32f</span><span class="tok-p">,</span> <span class="tok-n">frameFiltered</span><span class="tok-p">,</span> <span class="tok-n">frame32f</span><span class="tok-p">.</span><span class="tok-n">depth</span><span class="tok-p">(),</span> <span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">),</span> <span class="tok-mi">0</span><span class="tok-p">);</span>
+<span class="tok-p">}</span>
+<span class="tok-k">else</span><span class="tok-p">{</span>
+   <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">Mat</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-n">CV_32F</span><span class="tok-p">,</span> <span class="tok-n">gauss</span><span class="tok-p">);</span>
+   <span class="tok-n">scaleAdd</span><span class="tok-p">(</span><span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-o">/</span><span class="tok-mf">16.0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-o">::</span><span class="tok-n">zeros</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-n">CV_32F</span><span class="tok-p">),</span> <span class="tok-n">mask1</span><span class="tok-p">);</span>
+   <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">mask1</span><span class="tok-p">;</span>
+   <span class="tok-n">filter2D</span><span class="tok-p">(</span><span class="tok-n">frame32f</span><span class="tok-p">,</span> <span class="tok-n">frameAux</span><span class="tok-p">,</span> <span class="tok-n">frame32f</span><span class="tok-p">.</span><span class="tok-n">depth</span><span class="tok-p">(),</span> <span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">),</span> <span class="tok-mi">0</span><span class="tok-p">);</span>
+   <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">Mat</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-n">CV_32F</span><span class="tok-p">,</span> <span class="tok-n">laplacian</span><span class="tok-p">);</span>
+   <span class="tok-n">filter2D</span><span class="tok-p">(</span><span class="tok-n">frameAux</span><span class="tok-p">,</span> <span class="tok-n">frameFiltered</span><span class="tok-p">,</span> <span class="tok-n">frameAux</span><span class="tok-p">.</span><span class="tok-n">depth</span><span class="tok-p">(),</span> <span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">),</span> <span class="tok-mi">0</span><span class="tok-p">);</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>O efeito pode ser observado na imagens abaixo:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="original1.png" alt="original1">
+</div>
+<div class="title">Figure 9. Imagem Original</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="lapl.png" alt="lapl">
+</div>
+<div class="title">Figure 10. Apenas com filtro laplaciano</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="laplgauss.png" alt="laplgauss">
+</div>
+<div class="title">Figure 11. Filtros gaussiano e laplaciano</div>
+</div>
 </div>
 </div>
 </div>
@@ -1554,7 +1607,7 @@ Bolhas sem furos: 14</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-19 19:16:40 BRT
+Last updated 2016-09-19 23:54:29 BRT
 </div>
 </div>
 </body>

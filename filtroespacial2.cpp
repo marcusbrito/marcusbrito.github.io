@@ -15,13 +15,14 @@ void printmask(Mat &m){
 
 void menu(){
   cout << "\npressione a tecla para ativar o filtro: \n"
-  "a - calcular modulo\n"
+    "a - calcular modulo\n"
     "m - media\n"
     "g - gauss\n"
     "v - vertical\n"
-  "h - horizontal\n"
+    "h - horizontal\n"
     "l - laplaciano\n"
-  "esc - sair\n";
+    "x - laplgauss\n"
+    "esc - sair\n";
 }
 
 int main(int argvc, char** argv){
@@ -68,7 +69,7 @@ int main(int argvc, char** argv){
   for(;;){
     video >> cap; 
     cvtColor(cap, frame, CV_BGR2GRAY);
-    flip(frame, frame, 1);
+    //flip(frame, frame, 1);
     imshow("original", frame);
     frame.convertTo(frame32f, CV_32F);
     if (aux == 0)
@@ -77,7 +78,8 @@ int main(int argvc, char** argv){
     }
      else{
       mask = Mat(3, 3, CV_32F, gauss);
-      //scaleAdd(mask, 1/16.0, Mat::zeros(3,3,CV_32F), mask1);
+      scaleAdd(mask, 1/16.0, Mat::zeros(3,3,CV_32F), mask1);
+      mask = mask1;
       filter2D(frame32f, frameAux, frame32f.depth(), mask, Point(1,1), 0);
       mask = Mat(3, 3, CV_32F, laplacian);
       filter2D(frameAux, frameFiltered, frameAux.depth(), mask, Point(1,1), 0);
