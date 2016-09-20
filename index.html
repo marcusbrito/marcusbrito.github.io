@@ -1614,10 +1614,9 @@ Bolhas sem furos: 14</pre>
 <h3 id="_tilt_shift">2.7. Tilt Shift</h3>
 <div class="sect3">
 <h4 id="_objetivo_7">2.7.1. Objetivo</h4>
-
+<div class="paragraph">
+<p>O objetivo dessa atividade era simular o efeito chamado <em>tiltshift</em>, geralmente feito com lentes epeciais, mas realizando o processo em software a partir das técnicas de processamento de imagem estudadas até agora.</p>
 </div>
-<div class="sect3">
-<h4 id="_código_7">2.7.2. Código</h4>
 <div class="listingblock">
 <div class="title">tiltshift.cpp</div>
 <div class="content">
@@ -1647,38 +1646,52 @@ Bolhas sem furos: 14</pre>
 <span class="tok-p">}</span>
 
 <span class="tok-kt">void</span> <span class="tok-nf">blend</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
- <span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">rows</span> <span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span>
+ <span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">rows</span> <span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">)</span>
  <span class="tok-p">{</span>
    <span class="tok-kt">double</span> <span class="tok-n">alpha</span> <span class="tok-o">=</span> <span class="tok-n">calcAlpha</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">sup_slider</span><span class="tok-p">,</span><span class="tok-n">inf_slider</span><span class="tok-p">,</span><span class="tok-n">d_slider</span><span class="tok-p">);</span>
    <span class="tok-n">addWeighted</span><span class="tok-p">(</span><span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">row</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">),</span><span class="tok-n">alpha</span><span class="tok-p">,</span> <span class="tok-n">borrada</span><span class="tok-p">.</span><span class="tok-n">row</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">),</span><span class="tok-mi">1</span><span class="tok-o">-</span><span class="tok-n">alpha</span><span class="tok-p">,</span><span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-k">final</span><span class="tok-p">.</span><span class="tok-n">row</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">));</span>
  <span class="tok-p">}</span>
- <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;addweighted&quot;</span><span class="tok-p">,</span> <span class="tok-k">final</span><span class="tok-p">);</span>
+ <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;resultado&quot;</span><span class="tok-p">,</span> <span class="tok-k">final</span><span class="tok-p">);</span>
 <span class="tok-p">}</span>
 
 <span class="tok-kt">int</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">argvc</span><span class="tok-p">,</span> <span class="tok-kt">char</span><span class="tok-o">**</span> <span class="tok-n">argv</span><span class="tok-p">){</span>
-  <span class="tok-n">original</span> <span class="tok-o">=</span> <span class="tok-n">imread</span><span class="tok-p">(</span><span class="tok-s">&quot;dead.png&quot;</span><span class="tok-p">);</span>
+  <span class="tok-kt">float</span> <span class="tok-n">media</span><span class="tok-p">[]</span> <span class="tok-o">=</span> <span class="tok-p">{</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span>
+           <span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span>
+           <span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">};</span>
+  <span class="tok-n">Mat</span> <span class="tok-n">mask</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-n">CV_32F</span><span class="tok-p">),</span> <span class="tok-n">mask1</span><span class="tok-p">;</span>
+  <span class="tok-n">original</span> <span class="tok-o">=</span> <span class="tok-n">imread</span><span class="tok-p">(</span><span class="tok-s">&quot;vaticano.jpg&quot;</span><span class="tok-p">);</span>
   <span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">copyTo</span><span class="tok-p">(</span><span class="tok-n">borrada</span><span class="tok-p">);</span>
-  <span class="tok-n">namedWindow</span><span class="tok-p">(</span><span class="tok-s">&quot;addweighted&quot;</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">);</span>
+  <span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">copyTo</span><span class="tok-p">(</span><span class="tok-k">final</span><span class="tok-p">);</span>
+  <span class="tok-n">namedWindow</span><span class="tok-p">(</span><span class="tok-s">&quot;resultado&quot;</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">);</span>
+
+  <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">Mat</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-n">CV_32F</span><span class="tok-p">,</span> <span class="tok-n">media</span><span class="tok-p">);</span>
+  <span class="tok-n">scaleAdd</span><span class="tok-p">(</span><span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-o">/</span><span class="tok-mf">9.0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-o">::</span><span class="tok-n">zeros</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-n">CV_32F</span><span class="tok-p">),</span> <span class="tok-n">mask1</span><span class="tok-p">);</span>
+  <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">mask1</span><span class="tok-p">;</span>
+
+  <span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-mi">40</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-n">filter2D</span><span class="tok-p">(</span><span class="tok-n">original</span><span class="tok-p">,</span> <span class="tok-n">borrada</span><span class="tok-p">,</span> <span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">depth</span><span class="tok-p">(),</span> <span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">),</span> <span class="tok-mi">0</span><span class="tok-p">);</span>
+  <span class="tok-p">}</span>
 
   <span class="tok-n">sup_max</span> <span class="tok-o">=</span> <span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-p">;</span>
   <span class="tok-n">inf_max</span> <span class="tok-o">=</span> <span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">rows</span><span class="tok-p">;</span>
 
   <span class="tok-n">sprintf</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;Decaimento&quot;</span><span class="tok-p">,</span> <span class="tok-n">d_max</span> <span class="tok-p">);</span>
-  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;addweighted&quot;</span><span class="tok-p">,</span>
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;resultado&quot;</span><span class="tok-p">,</span>
           <span class="tok-o">&amp;</span><span class="tok-n">d_slider</span><span class="tok-p">,</span>
           <span class="tok-n">d_max</span><span class="tok-p">,</span>
           <span class="tok-n">blend</span> <span class="tok-p">);</span>
   <span class="tok-n">blend</span><span class="tok-p">(</span><span class="tok-n">d_slider</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
 
   <span class="tok-n">sprintf</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;Limite superior&quot;</span><span class="tok-p">,</span> <span class="tok-n">sup_max</span> <span class="tok-p">);</span>
-  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;addweighted&quot;</span><span class="tok-p">,</span>
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;resultado&quot;</span><span class="tok-p">,</span>
           <span class="tok-o">&amp;</span><span class="tok-n">sup_slider</span><span class="tok-p">,</span>
           <span class="tok-n">sup_max</span><span class="tok-p">,</span>
           <span class="tok-n">blend</span><span class="tok-p">);</span>
   <span class="tok-n">blend</span><span class="tok-p">(</span><span class="tok-n">sup_slider</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
 
   <span class="tok-n">sprintf</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;Limite inferior&quot;</span><span class="tok-p">,</span> <span class="tok-n">inf_max</span> <span class="tok-p">);</span>
-  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;addweighted&quot;</span><span class="tok-p">,</span>
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;resultado&quot;</span><span class="tok-p">,</span>
           <span class="tok-o">&amp;</span><span class="tok-n">inf_slider</span><span class="tok-p">,</span>
           <span class="tok-n">inf_max</span><span class="tok-p">,</span>
           <span class="tok-n">blend</span> <span class="tok-p">);</span>
@@ -1692,8 +1705,79 @@ Bolhas sem furos: 14</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_análise_7">2.7.3. Análise</h4>
+<h4 id="_análise_7">2.7.2. Análise</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>O efeito <em>tiltshift</em> é gerado por uma inclinação entre o plano de foco(plano da cena que deseja-se fotografar) e o plano da projeção(plano do sensor no qual a luz incide). Para criar esse feito em "hardware", são utilizadas lentes especiais, geralmente muito caras. Entretanto, é possível simular o mesmo resultado a partir de técnicas de processamento de imagem demostradas a seguir.</p>
+</li>
+<li>
+<p>A ideia é pegar a imagem original e somá-la com ela própia borrada, com as proporções adequadas para simular o efeito.</p>
+</li>
+<li>
+<p>Inicialmente, é realizado o borramento da imagem:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-kt">float</span> <span class="tok-n">media</span><span class="tok-p">[]</span> <span class="tok-o">=</span> <span class="tok-p">{</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span>
+           <span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span>
+           <span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">};</span>
+  <span class="tok-n">Mat</span> <span class="tok-nf">mask</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-n">CV_32F</span><span class="tok-p">),</span> <span class="tok-n">mask1</span><span class="tok-p">;</span>
 
+  <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">Mat</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-n">CV_32F</span><span class="tok-p">,</span> <span class="tok-n">media</span><span class="tok-p">);</span>
+  <span class="tok-n">scaleAdd</span><span class="tok-p">(</span><span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-o">/</span><span class="tok-mf">9.0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-o">::</span><span class="tok-n">zeros</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-mi">3</span><span class="tok-p">,</span><span class="tok-n">CV_32F</span><span class="tok-p">),</span> <span class="tok-n">mask1</span><span class="tok-p">);</span>
+  <span class="tok-n">mask</span> <span class="tok-o">=</span> <span class="tok-n">mask1</span><span class="tok-p">;</span>
+
+  <span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-mi">40</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-n">filter2D</span><span class="tok-p">(</span><span class="tok-n">original</span><span class="tok-p">,</span> <span class="tok-n">borrada</span><span class="tok-p">,</span> <span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">depth</span><span class="tok-p">(),</span> <span class="tok-n">mask</span><span class="tok-p">,</span> <span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">),</span> <span class="tok-mi">0</span><span class="tok-p">);</span>
+  <span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Foi utilizado o filtro da média, que gera o borramento. Para que efeito fique bastante evidente, o efeito foi aplicado 40 vezes.</p>
+</li>
+<li>
+<p>A função utilizada para simular o "degradê" da foto normal para a foto borrada foi:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="funcao.png" alt="funcao">
+</div>
+<div class="title">Figure 12. Função</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="func.png" alt="func">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>No programa, ela foi simulada por:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-kt">double</span> <span class="tok-nf">calcAlpha</span><span class="tok-p">(</span><span class="tok-kt">double</span> <span class="tok-n">x</span><span class="tok-p">,</span> <span class="tok-kt">double</span> <span class="tok-n">l1</span><span class="tok-p">,</span> <span class="tok-kt">double</span> <span class="tok-n">l2</span><span class="tok-p">,</span> <span class="tok-kt">double</span> <span class="tok-n">d</span><span class="tok-p">){</span>
+  <span class="tok-k">return</span> <span class="tok-mf">0.5</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-n">tanh</span><span class="tok-p">((</span><span class="tok-n">x</span><span class="tok-o">-</span><span class="tok-n">l1</span><span class="tok-p">)</span><span class="tok-o">/</span><span class="tok-n">d</span><span class="tok-p">)</span> <span class="tok-o">-</span> <span class="tok-n">tanh</span><span class="tok-p">((</span><span class="tok-n">x</span><span class="tok-o">-</span><span class="tok-n">l2</span><span class="tok-p">)</span><span class="tok-o">/</span><span class="tok-n">d</span><span class="tok-p">));</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>X representa a linha da imagem, L1 representa o limite superior em que a função vale 0.5, L2 o limite inferior, e D o decaimento da imagem(quanto maior o D, menor o decaimento).</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -1701,7 +1785,7 @@ Bolhas sem furos: 14</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-20 14:44:38 BRT
+Last updated 2016-09-20 16:21:11 BRT
 </div>
 </div>
 </body>

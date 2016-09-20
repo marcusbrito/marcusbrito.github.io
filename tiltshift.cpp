@@ -24,38 +24,52 @@ double calcAlpha(double x, double l1, double l2, double d){
 }
 
 void blend(int, void*){
- for (int i = 0; i < original.rows ; ++i)
+ for (int i = 0; i < original.rows ; i++)
  {
    double alpha = calcAlpha(i,sup_slider,inf_slider,d_slider);
    addWeighted(original.row(i),alpha, borrada.row(i),1-alpha,0.0,final.row(i));
  }
- imshow("addweighted", final);
+ imshow("resultado", final);
 }
 
 int main(int argvc, char** argv){
-  original = imread("dead.png");
+  float media[] = {1,1,1,
+           1,1,1,
+           1,1,1};
+  Mat mask(3,3,CV_32F), mask1;
+  original = imread("vaticano.jpg");
   original.copyTo(borrada);
-  namedWindow("addweighted", 1);
+  original.copyTo(final);
+  namedWindow("resultado", 1);
+
+  mask = Mat(3, 3, CV_32F, media);
+  scaleAdd(mask, 1/9.0, Mat::zeros(3,3,CV_32F), mask1);
+  mask = mask1;
+
+  for (int i = 0; i < 40; ++i)
+  {
+    filter2D(original, borrada, original.depth(), mask, Point(1,1), 0);
+  }
 
   sup_max = original.rows;
   inf_max = original.rows;
 
   sprintf( TrackbarName, "Decaimento", d_max );
-  createTrackbar( TrackbarName, "addweighted",
+  createTrackbar( TrackbarName, "resultado",
           &d_slider,
           d_max,
           blend );
   blend(d_slider, 0 );
   
   sprintf( TrackbarName, "Limite superior", sup_max );
-  createTrackbar( TrackbarName, "addweighted",
+  createTrackbar( TrackbarName, "resultado",
           &sup_slider,
           sup_max,
           blend);
   blend(sup_slider, 0 );
 
   sprintf( TrackbarName, "Limite inferior", inf_max );
-  createTrackbar( TrackbarName, "addweighted",
+  createTrackbar( TrackbarName, "resultado",
           &inf_slider,
           inf_max,
           blend );
