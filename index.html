@@ -1776,7 +1776,65 @@ Bolhas sem furos: 14</pre>
 <li>
 <p>X representa a linha da imagem, L1 representa o limite superior em que a função vale 0.5, L2 o limite inferior, e D o decaimento da imagem(quanto maior o D, menor o decaimento).</p>
 </li>
+<li>
+<p>A partir dessa função, denominada alpha, pudemos realizar a soma da imagem original(multiplicada por alpha) com a imagem borrada(multiplicada por alpha -1):</p>
+</li>
 </ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-kt">void</span> <span class="tok-nf">blend</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">void</span><span class="tok-o">*</span><span class="tok-p">){</span>
+ <span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">rows</span> <span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">)</span>
+ <span class="tok-p">{</span>
+   <span class="tok-kt">double</span> <span class="tok-n">alpha</span> <span class="tok-o">=</span> <span class="tok-n">calcAlpha</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">sup_slider</span><span class="tok-p">,</span><span class="tok-n">inf_slider</span><span class="tok-p">,</span><span class="tok-n">d_slider</span><span class="tok-p">);</span>
+   <span class="tok-n">addWeighted</span><span class="tok-p">(</span><span class="tok-n">original</span><span class="tok-p">.</span><span class="tok-n">row</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">),</span><span class="tok-n">alpha</span><span class="tok-p">,</span> <span class="tok-n">borrada</span><span class="tok-p">.</span><span class="tok-n">row</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">),</span><span class="tok-mi">1</span><span class="tok-o">-</span><span class="tok-n">alpha</span><span class="tok-p">,</span><span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-k">final</span><span class="tok-p">.</span><span class="tok-n">row</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">));</span>
+ <span class="tok-p">}</span>
+ <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;resultado&quot;</span><span class="tok-p">,</span> <span class="tok-k">final</span><span class="tok-p">);</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A função "addWeighted" efetua a soma das linhas da imagem "original" ponderada pelo fator alpha com as linhas  de "borrada" ponderada por 1 - alpha, e armazena o resultado em "final".</p>
+</li>
+<li>
+<p>Para que o usuário pudesse selecionar os parâmetros, criamos <em>trackbars</em>. Uma para selecionar D, uma para L1 e outra para L2.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="cpp"><span class="tok-n">sprintf</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;Decaimento&quot;</span><span class="tok-p">,</span> <span class="tok-n">d_max</span> <span class="tok-p">);</span>
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;resultado&quot;</span><span class="tok-p">,</span>
+          <span class="tok-o">&amp;</span><span class="tok-n">d_slider</span><span class="tok-p">,</span>
+          <span class="tok-n">d_max</span><span class="tok-p">,</span>
+          <span class="tok-n">blend</span> <span class="tok-p">);</span>
+  <span class="tok-n">blend</span><span class="tok-p">(</span><span class="tok-n">d_slider</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
+
+  <span class="tok-n">sprintf</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;Limite superior&quot;</span><span class="tok-p">,</span> <span class="tok-n">sup_max</span> <span class="tok-p">);</span>
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;resultado&quot;</span><span class="tok-p">,</span>
+          <span class="tok-o">&amp;</span><span class="tok-n">sup_slider</span><span class="tok-p">,</span>
+          <span class="tok-n">sup_max</span><span class="tok-p">,</span>
+          <span class="tok-n">blend</span><span class="tok-p">);</span>
+  <span class="tok-n">blend</span><span class="tok-p">(</span><span class="tok-n">sup_slider</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
+
+  <span class="tok-n">sprintf</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;Limite inferior&quot;</span><span class="tok-p">,</span> <span class="tok-n">inf_max</span> <span class="tok-p">);</span>
+  <span class="tok-n">createTrackbar</span><span class="tok-p">(</span> <span class="tok-n">TrackbarName</span><span class="tok-p">,</span> <span class="tok-s">&quot;resultado&quot;</span><span class="tok-p">,</span>
+          <span class="tok-o">&amp;</span><span class="tok-n">inf_slider</span><span class="tok-p">,</span>
+          <span class="tok-n">inf_max</span><span class="tok-p">,</span>
+          <span class="tok-n">blend</span> <span class="tok-p">);</span>
+  <span class="tok-n">blend</span><span class="tok-p">(</span><span class="tok-n">inf_slider</span><span class="tok-p">,</span> <span class="tok-mi">0</span> <span class="tok-p">);</span>
+  <span class="tok-o">----</span>
+
+  <span class="tok-o">*</span> <span class="tok-n">Sempre</span> <span class="tok-n">que</span> <span class="tok-n">o</span> <span class="tok-n">usu</span><span class="tok-err">á</span><span class="tok-n">rio</span> <span class="tok-n">altera</span> <span class="tok-n">algum</span> <span class="tok-n">valor</span><span class="tok-p">,</span> <span class="tok-n">a</span> <span class="tok-n">fun</span><span class="tok-err">çã</span><span class="tok-n">o</span> <span class="tok-n">_blend_</span> <span class="tok-err">é</span> <span class="tok-n">novamente</span> <span class="tok-n">chamada</span><span class="tok-p">,</span> <span class="tok-n">os</span> <span class="tok-n">c</span><span class="tok-err">á</span><span class="tok-n">lculos</span> <span class="tok-n">s</span><span class="tok-err">ã</span><span class="tok-n">o</span> <span class="tok-n">feitos</span> <span class="tok-n">novamentes</span><span class="tok-p">,</span> <span class="tok-n">e</span> <span class="tok-n">a</span> <span class="tok-n">nova</span> <span class="tok-n">imagem</span> <span class="tok-err">é</span> <span class="tok-n">exibida</span><span class="tok-p">.</span>
+
+  <span class="tok-o">*</span> <span class="tok-n">Esse</span> <span class="tok-n">m</span><span class="tok-err">é</span><span class="tok-n">todo</span> <span class="tok-n">provou</span><span class="tok-o">-</span><span class="tok-n">se</span> <span class="tok-n">bastante</span> <span class="tok-n">efetivo</span><span class="tok-p">,</span> <span class="tok-n">permitindo</span> <span class="tok-n">produzir</span> <span class="tok-n">imagens</span> <span class="tok-n">com</span> <span class="tok-n">um</span> <span class="tok-n">efeito</span> <span class="tok-n">muito</span> <span class="tok-n">similar</span> <span class="tok-n">ao</span> <span class="tok-n">da</span> <span class="tok-n">lente</span> <span class="tok-nl">especial</span><span class="tok-p">:</span>
+
+  <span class="tok-p">.</span><span class="tok-n">Imagens</span> <span class="tok-n">obtidas</span> <span class="tok-n">com</span> <span class="tok-n">o</span> <span class="tok-n">m</span><span class="tok-err">é</span><span class="tok-n">todo</span> <span class="tok-n">de</span> <span class="tok-n">processamento</span> <span class="tok-n">digital</span>
+  <span class="tok-n">image</span><span class="tok-o">::</span><span class="tok-n">tiltshift</span><span class="tok-p">.</span><span class="tok-n">png</span><span class="tok-p">[]</span>
+  <span class="tok-n">image</span><span class="tok-o">::</span><span class="tok-n">vaticano</span><span class="tok-p">.</span><span class="tok-n">png</span><span class="tok-p">[]</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1785,7 +1843,7 @@ Bolhas sem furos: 14</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-20 16:21:11 BRT
+Last updated 2016-09-20 16:36:12 BRT
 </div>
 </div>
 </body>
