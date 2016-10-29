@@ -92,7 +92,7 @@ int main(int argc, char** argv){
 
   on_trackbar_canny(top_slider, 0 );
 
-  imwrite("pontos.jpg", final);
+  imwrite("canny1.jpg", final);
   waitKey();
 
 
