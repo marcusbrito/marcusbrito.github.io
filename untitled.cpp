@@ -29,11 +29,11 @@ void blend(int, void*){
    double alpha = calcAlpha(i,sup_slider,inf_slider,d_slider);
    addWeighted(original.row(i),alpha, borrada.row(i),1-alpha,0.0,final.row(i));
  }
- imshow("resultado", final);
+ 
 }
 
 int main(int argvc, char** argv){
-  
+  VideoCapture video;
   original = imread("vaticano.jpg");
   original.copyTo(borrada);
   original.copyTo(final);
@@ -47,6 +47,10 @@ int main(int argvc, char** argv){
   mask = Mat(3, 3, CV_32F, media);
   scaleAdd(mask, 1/9.0, Mat::zeros(3,3,CV_32F), mask1);
   mask = mask1;
+
+  video.open(0); 
+  if(!video.isOpened()) 
+    return -1;
 
   for (int i = 0; i < 40; ++i)
   {
@@ -77,7 +81,18 @@ int main(int argvc, char** argv){
           blend );
   blend(inf_slider, 0 );
 
+  while(1){
+    cap >> image1;
+    
 
-  waitKey(0);
+    imshow("resultado", final);
+
+    image1.copyTo(image);
+
+    if(valor>8000)
+    printf("MOVIMENTO DETECTADO - %f\n",valor );
+
+    if(waitKey(30) >= 0) break;  
+  }
   return 0;
 }
