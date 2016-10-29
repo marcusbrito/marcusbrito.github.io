@@ -7,20 +7,22 @@
 using namespace cv;
 using namespace std;
 
-int d0 = 20;
-int d0_max = 100;
+int d0 = 80;
+int d0_max = 200;
 
-int gamaL = 20;
+int gamaL = 25;
 int gamaL_max = 100;
 
 int gamaH = 20;
 int gamaH_max = 100;
 
+double gamaH0,gamaL0;
+
 char TrackbarName[50];
 
 Mat imaginaryInput, complexImage, multsp;
   Mat padded, filter, mag;
-  Mat original,image, tmp,final;
+  Mat original,image, tmp,final,aux;
   Mat_<float> realInput, zeros;
   vector<Mat> planos;
   double d;
@@ -46,7 +48,7 @@ void homo(int, void*){
   dft_M = getOptimalDFTSize(original.rows);
   dft_N = getOptimalDFTSize(original.cols);
   image += Scalar::all(1);
-  log(image,image);
+  log(aux,image);
   normalize(image, image, 0, 1, CV_MINMAX);
   imshow("Original", original);
   imshow("log", image);
@@ -60,10 +62,14 @@ void homo(int, void*){
   filter = complexImage.clone();
   tmp = Mat(dft_M, dft_N, CV_32F);
 
+  gamaH0 = (double) gamaH/20;
+  gamaL0 = (double) gamaL/100;
+  printf("gamaH: %f - gamaL: %f - D0 = %d\n",gamaH0,gamaL0,d0 );
+
   for(int i=0; i<dft_M; i++){
     for(int j=0; j<dft_N; j++){
       d = (i-dft_M/2)*(i-dft_M/2)+(j-dft_N/2)*(j-dft_N/2);
-      tmp.at<float> (i,j) = (gamaH - gamaL)*(1 - exp(-d/(d0*d0))) + gamaL;
+      tmp.at<float> (i,j) = (gamaH0 - gamaL0)*(1 - exp(-d/(d0*d0))) + gamaL0;
     }
   }
   Mat comps[]= {tmp, tmp};
@@ -86,7 +92,7 @@ void homo(int, void*){
   planos.clear();
   split(complexImage, planos);
   imshow("antes da exp", planos[0]);
-  //normalize(planos[0], planos[0], 0, 1, CV_MINMAX);
+  normalize(planos[0], planos[0], 0, 1, CV_MINMAX);
   exp(planos[0],final);
   normalize(final, final, 0, 1, CV_MINMAX);
   imshow("resultado", final);
@@ -95,6 +101,7 @@ void homo(int, void*){
 int main(int argc, char** argv){
   original = imread(argv[1],CV_LOAD_IMAGE_GRAYSCALE);
   image = Mat_<float>(original);
+  aux = Mat_<float>(original);
   final = Mat_<float>(original);
   
 
