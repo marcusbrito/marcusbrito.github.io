@@ -2004,7 +2004,26 @@ Bolhas sem furos: 14</pre>
 </div>
 <div class="sect3">
 <h4 id="_análise_8">3.1.3. Análise</h4>
-
+<div class="literalblock">
+<div class="content">
+<pre>Como foi estudado, uma imagem é formada pelo produto da iluminância(quantidade de luz que atinge cada ponto) e reflectância(o quanto cada ponto reflete da luz que recebe):</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stem:[f(x,y) = i(x,y) * r(x,y)]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Como o objetivo do filtro homomórfico é corrigir a iluminação da imagem, precisamos de um filtro que atinja apenas a iluminância. Surge então o problema: como atingir apenas uma componente da imagem, atingindo minimamente a outra componente? Conseguimos a partir de uma artifício matemático. Se aplicarmos o logaritmo natural a ambos os lados da equação, obtemos:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stem:[z(x,y) = ln f(x,y) = ln i(x,y) + ln r(x,y)]</pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2232,8 +2251,24 @@ Bolhas sem furos: 14</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-29 17:18:10 BRT
+Last updated 2016-10-29 17:40:35 BRT
 </div>
 </div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>
